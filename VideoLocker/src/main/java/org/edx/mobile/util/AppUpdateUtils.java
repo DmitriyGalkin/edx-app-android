@@ -49,7 +49,7 @@ public final class AppUpdateUtils {
     }
 
     /**
-     * Open an native app or a website on a web browser to update the app.
+     * Open a native app or a website on a web browser to update the app.
      *
      * @param context A Context for starting the new Activity.
      */
