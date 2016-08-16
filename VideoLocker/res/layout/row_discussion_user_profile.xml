@@ -13,44 +13,37 @@
         android:id="@+id/profile_image"
         android:layout_width="@dimen/discussion_image_diameter"
         android:layout_height="@dimen/discussion_image_diameter"
+        android:layout_gravity="center_vertical"
         android:layout_marginEnd="@dimen/discussion_responses_standard_margin"
         android:layout_marginRight="@dimen/discussion_responses_standard_margin"
         android:src="@drawable/profile_photo_placeholder" />
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/discussion_author_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/edx_grayscale_neutral_base"
-            android:textSize="@dimen/edx_xxx_small"
+            style="@style/discussion_regular_text"
+            android:textDirection="locale"
             android:textStyle="bold"
             tools:text="Brian (Staff)" />
 
         <TextView
             android:id="@+id/discussion_date_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/edx_grayscale_neutral_base"
+            style="@style/discussion_regular_text"
             android:textDirection="locale"
-            android:textSize="@dimen/edx_xxx_small"
             tools:text="10 minutes ago" />
 
         <TextView
             android:id="@+id/discussion_responses_answer_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/discussion_regular_text"
             android:drawablePadding="@dimen/discussion_endorsed_response_icon_padding"
             android:text="@string/discussion_responses_answer"
             android:textColor="@color/edx_success_accent"
-            android:textSize="@dimen/edx_x_small"
             android:visibility="gone"
-            tools:showIn="@layout/row_discussion_responses_response"
             tools:visibility="visible" />
     </LinearLayout>
 </LinearLayout>
