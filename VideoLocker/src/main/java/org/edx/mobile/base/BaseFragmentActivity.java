@@ -26,8 +26,6 @@ import org.edx.mobile.event.NetworkConnectivityChangeEvent;
 import org.edx.mobile.interfaces.NetworkObserver;
 import org.edx.mobile.interfaces.NetworkSubject;
 import org.edx.mobile.logger.Logger;
-import org.edx.mobile.model.api.ProfileModel;
-import org.edx.mobile.module.prefs.PrefManager;
 import org.edx.mobile.util.NetworkUtil;
 import org.edx.mobile.util.ViewAnimationUtil;
 import org.edx.mobile.view.ICommonUI;
@@ -54,8 +52,7 @@ public abstract class BaseFragmentActivity extends BaseAppActivity
     @Inject
     protected IEdxEnvironment environment;
 
-
-    private List<NetworkObserver> networkObservers = new ArrayList<NetworkObserver>();
+    private List<NetworkObserver> networkObservers = new ArrayList<>();
 
     public void registerNetworkObserver(NetworkObserver observer) {
         if (observer != null && !networkObservers.contains(observer)) {
@@ -99,9 +96,6 @@ public abstract class BaseFragmentActivity extends BaseAppActivity
     protected void onStart() {
         super.onStart();
         isActivityStarted = true;
-
-        PrefManager pmFeatures = new PrefManager(this, PrefManager.Pref.FEATURES);
-
 
         // enabling action bar app icon.
         ActionBar bar = getSupportActionBar();
@@ -290,7 +284,7 @@ public abstract class BaseFragmentActivity extends BaseAppActivity
     /**
      * Handle options menu item selection. This is called from
      * {@link #onOptionsItemSelected(MenuItem)} to provide a menu
-     * selection handler that can be overriden by subclass that override
+     * selection handler that can be overridden by subclass that override
      * {@link #createOptionsMenu(Menu)}, and should only be used to handle
      * selections of the menu items that are initialized from that method.
      *
@@ -332,7 +326,7 @@ public abstract class BaseFragmentActivity extends BaseAppActivity
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        // Pass any configuration change to the drawer toggls
+        // Pass any configuration change to the drawer toggles
         if (mDrawerToggle != null) {
             mDrawerToggle.onConfigurationChanged(newConfig);
         }

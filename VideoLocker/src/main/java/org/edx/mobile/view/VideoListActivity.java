@@ -399,9 +399,6 @@ public class VideoListActivity extends BaseVideosDownloadStateActivity
         finish();
     }
 
-    ;
-
-
     @Override
     public boolean showInfoMessage(String message) {
         //If the wifi settings message is already shown on video player,
