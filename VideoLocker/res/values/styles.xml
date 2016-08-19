@@ -280,6 +280,14 @@
         <item name="android:layout_height">@dimen/icon_view_standard_width_height</item>
     </style>
 
+    <style name="discussion_thread_icon">
+        <item name="android:layout_width">@dimen/edx_small</item>
+        <item name="android:layout_height">@dimen/edx_small</item>
+        <item name="android:layout_marginEnd">@dimen/discussion_posts_icon_margin</item>
+        <item name="android:layout_marginRight">@dimen/discussion_posts_icon_margin</item>
+        <item name="android:layout_marginTop">@dimen/discussion_posts_icon_margin</item>
+    </style>
+
     <style name="discussion_responses_nested_card_layout">
         <item name="android:layout_width">match_parent</item>
         <item name="android:paddingLeft">@dimen/discussion_responses_box_padding</item>
