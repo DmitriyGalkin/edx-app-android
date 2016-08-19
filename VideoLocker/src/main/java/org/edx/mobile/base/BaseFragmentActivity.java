@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -183,6 +184,16 @@ public abstract class BaseFragmentActivity extends BaseAppActivity
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (mDrawerLayout != null && mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            mDrawerLayout.closeDrawers();
+        } else {
+            super.onBackPressed();
+        }
+    }
+
     //this is configure the Navigation Drawer of the application
     protected void configureDrawer() {
         DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -218,7 +229,7 @@ public abstract class BaseFragmentActivity extends BaseAppActivity
      * Call this function if you do not want to allow
      * opening/showing the drawer(Navigation Fragment) on swiping left to right
      */
-    protected void blockDrawerFromOpening(){
+    protected void blockDrawerFromOpening() {
         DrawerLayout drawerLayout = (DrawerLayout)
                 findViewById(R.id.drawer_layout);
         if (drawerLayout != null) {
