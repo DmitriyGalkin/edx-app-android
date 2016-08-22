@@ -280,7 +280,7 @@
         <item name="android:layout_height">@dimen/icon_view_standard_width_height</item>
     </style>
 
-    <style name="discussion_thread_icon">
+    <style name="discussion_thread_icon" tools:targetApi="17">
         <item name="android:layout_width">@dimen/edx_small</item>
         <item name="android:layout_height">@dimen/edx_small</item>
         <item name="android:layout_marginEnd">@dimen/discussion_posts_icon_margin</item>
@@ -294,7 +294,7 @@
         <item name="android:paddingRight">@dimen/discussion_responses_box_padding</item>
     </style>
 
-    <style name="discussion_action_bar_icon">
+    <style name="discussion_action_bar_icon" tools:targetApi="17">
         <item name="android:layout_width">@dimen/edx_small</item>
         <item name="android:layout_height">@dimen/edx_small</item>
         <item name="android:layout_marginEnd">@dimen/discussion_responses_action_bar_icon_margin</item>
