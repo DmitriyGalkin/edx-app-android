@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 
 import org.edx.mobile.R;
-import org.edx.mobile.third_party.versioning.ArtifactVersion;
+import org.edx.mobile.util.Version;
 
 import java.util.Date;
 
@@ -38,7 +38,7 @@ public class NewVersionAvailableEvent implements Comparable<NewVersionAvailableE
      *                          each other due to wrong local clock time or an inconsistency in the
      *                          server configurations).
      */
-    public static void post(@Nullable final ArtifactVersion newVersion,
+    public static void post(@Nullable final Version newVersion,
                             @Nullable final Date lastSupportedDate,
                             final boolean isUnsupported) {
         final NewVersionAvailableEvent event;
@@ -56,7 +56,7 @@ public class NewVersionAvailableEvent implements Comparable<NewVersionAvailableE
     }
 
     @Nullable
-    private final ArtifactVersion newVersion;
+    private final Version newVersion;
     @Nullable
     private final Date lastSupportedDate;
     private final boolean isUnsupported;
@@ -67,7 +67,7 @@ public class NewVersionAvailableEvent implements Comparable<NewVersionAvailableE
      * Construct a new instance of NewVersionAvailableEvent. Any individual parameter can be null or
      * false, but at last one needs to be non-null or true in order for the event to be valid. The
      * constructor is private because the class is only supposed to be initialized from the
-     * {@link #post(ArtifactVersion, Date, boolean)} method.
+     * {@link #post(Version, Date, boolean)} method.
      *
      * @param newVersion        The version number of the latest release of the app.
      * @param lastSupportedDate The last date on which the current version of the app will be
@@ -79,7 +79,7 @@ public class NewVersionAvailableEvent implements Comparable<NewVersionAvailableE
      *                          server configurations).
      * @throws IllegalArgumentException if all of the parameters are {@code null} or {@code false}.
      */
-    private NewVersionAvailableEvent(@Nullable final ArtifactVersion newVersion,
+    private NewVersionAvailableEvent(@Nullable final Version newVersion,
                                      @Nullable final Date lastSupportedDate,
                                      final boolean isUnsupported)
             throws IllegalArgumentException {
@@ -98,7 +98,7 @@ public class NewVersionAvailableEvent implements Comparable<NewVersionAvailableE
      *         available.
      */
     @Nullable
-    public ArtifactVersion getNewVersion() {
+    public Version getNewVersion() {
         return newVersion;
     }
 

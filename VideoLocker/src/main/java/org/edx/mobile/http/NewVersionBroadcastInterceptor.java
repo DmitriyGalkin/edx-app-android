@@ -2,9 +2,9 @@ package org.edx.mobile.http;
 
 import org.edx.mobile.BuildConfig;
 import org.edx.mobile.event.NewVersionAvailableEvent;
-import org.edx.mobile.third_party.versioning.ArtifactVersion;
-import org.edx.mobile.third_party.versioning.DefaultArtifactVersion;
+import org.edx.mobile.logger.Logger;
 import org.edx.mobile.util.DateUtil;
+import org.edx.mobile.util.Version;
 
 import java.io.IOException;
 import java.util.Date;
@@ -32,14 +32,31 @@ public class NewVersionBroadcastInterceptor implements Interceptor {
     private static final String HEADER_APP_VERSION_LAST_SUPPORTED_DATE =
             "EDX-APP-VERSION-LAST-SUPPORTED-DATE";
 
+    /**
+     * The logger for this class.
+     */
+    private final Logger logger = new Logger(NewVersionBroadcastInterceptor.class);
+
     @Override
     public Response intercept(final Chain chain) throws IOException {
         final Response response = chain.proceed(chain.request());
 
-        final ArtifactVersion appLatestVersion; {
+        final Version appLatestVersion; {
             final String appLatestVersionString = response.header(HEADER_APP_LATEST_VERSION);
-            appLatestVersion = appLatestVersionString == null ?
-                    null : new DefaultArtifactVersion(appLatestVersionString);
+            if (appLatestVersionString == null) {
+                appLatestVersion = null;
+            } else {
+                try {
+                    appLatestVersion = new Version(appLatestVersionString);
+                } catch (NumberFormatException e) {
+                    /* If the version number doesn't correspond to the
+                     * schema, then discard the data and just return the
+                     * response.
+                     */
+                    logger.error(e);
+                    return response;
+                }
+            }
         }
 
         final Date lastSupportedDate = DateUtil.convertToDate(
@@ -50,8 +67,7 @@ public class NewVersionBroadcastInterceptor implements Interceptor {
         // If any of these properties is available and valid, then broadcast the
         // event with the information we have.
         if (isUnsupported || lastSupportedDate != null || appLatestVersion != null &&
-                appLatestVersion.compareTo(
-                        new DefaultArtifactVersion(BuildConfig.VERSION_NAME)) > 0) {
+                appLatestVersion.compareTo(new Version(BuildConfig.VERSION_NAME)) > 0) {
             NewVersionAvailableEvent.post(appLatestVersion, lastSupportedDate, isUnsupported);
         }
 
