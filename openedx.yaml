@@ -4,5 +4,7 @@
 nick: andr
 oeps: {}
 owner: edx/edx-mobile-push
-tags: [mobile]
+tags:
+  - mobile
+  - android
 track-pulls: true
