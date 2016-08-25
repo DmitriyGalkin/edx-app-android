@@ -2,20 +2,27 @@ package org.edx.mobile.view;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 
 import org.edx.mobile.R;
-import org.edx.mobile.base.BaseFragmentActivity;
 import org.edx.mobile.databinding.ActivityDiscoveryLaunchBinding;
 import org.edx.mobile.module.analytics.ISegment;
 
-public class DiscoveryLaunchActivity extends BaseFragmentActivity {
+public class DiscoveryLaunchActivity extends PresenterActivity<DiscoveryLaunchPresenter, DiscoveryLaunchPresenter.ViewInterface> {
 
+    @NonNull
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected DiscoveryLaunchPresenter createPresenter(@Nullable Bundle savedInstanceState) {
+        return new DiscoveryLaunchPresenter();
+    }
+
+    @NonNull
+    @Override
+    protected DiscoveryLaunchPresenter.ViewInterface createView(@Nullable Bundle savedInstanceState) {
         final ActivityDiscoveryLaunchBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_discovery_launch);
         if (environment.getConfig().getCourseDiscoveryConfig().isCourseDiscoveryEnabled()) {
             binding.discoverCourses.setOnClickListener(new OnClickListener() {
@@ -40,6 +47,8 @@ public class DiscoveryLaunchActivity extends BaseFragmentActivity {
             binding.exploreSubjects.setVisibility(View.INVISIBLE);
         }
         environment.getSegment().trackScreenView(ISegment.Screens.LAUNCH_ACTIVITY);
+        return new DiscoveryLaunchPresenter.ViewInterface() {
+        };
     }
 
     @Override
